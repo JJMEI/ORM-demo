@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.apache.test.demo.mapper.XmlApplicationMapper">
+
+
+    <!--ParameterMap-->
+    <parameterMap id="applicationMap" type="java.util.Map">
+        <!--映射为ParameterMapping-->
+        <parameter property="id" javaType="java.lang.Integer"/>
+        <parameter property="owner" javaType="java.lang.String"/>
+    </parameterMap>
+
+    <!--ResultMap-->
+    <resultMap id="ApplicationResult" type="org.apache.test.demo.pojo.Application">
+        <!--ResultMapping-->
+        <id property="id" column="id"/>
+        <!--ResultMapping-->
+        <result property="applicationName" column="application_name"/>
+        <!--ResultMapping-->
+        <result property="owner" column="owner"/>
+        <result property="createTime" column="create_time"/>
+        <result property="modifyTime" column="modify_time"/>
+    </resultMap>
+
+    <select id="selectApplication" resultType="org.apache.test.demo.pojo.Application">
+        select * from t_application where id = #{id}
+    </select>
+</mapper>

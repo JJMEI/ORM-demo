@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <properties resource="demo/db.properties"/>
+
+    <settings>
+        <!--全局开启或关闭配置文件中的所有配置器已经配置的任何缓存 默认值true-->
+        <setting name="cacheEnabled" value="true"/>
+
+        <!--延迟加载的全局开关，当开启时，所有关联对象都会延迟加载，特定关联关系中可通过设置fetchType属性来覆盖该项的开关状态-->
+        <setting name="lazyLoadingEnabled" value="false"/>
+
+        <!--当开启时，任何方法的调用后加载该对象的所有属性。否则，每个属性会按需加载-->
+        <setting name="aggressiveLazyLoading" value="false"/>
+
+        <!--是否允许单一语句返回多结果集 默认true-->
+        <setting name="multipleResultSetsEnabled" value="true"/>
+
+        <!--使用列标签代替列名 默认true-->
+        <setting name="useColumnLabel" value="true"/>
+
+        <!--允许JDBC支持自动生成主键-->
+        <setting name="useGeneratedKeys" value="true"/>
+
+        <!--指定MyBatis应如何自动映射到字段或属性。NONE表示取消自动映射；PARTIAL只会自动映射没有定义嵌套结果集映射的结果集；FULL会自动映射任意复杂的结果集-->
+        <!--一般不要启用-->
+        <setting name="autoMappingBehavior" value="PARTIAL"/>
+
+        <!--指定发现自动映射目标未知列（或未知属性的行为）
+            NONE 不做任何反应
+            WARNING 输出提醒日志
+            FAILING 映射失败 抛出SqlSessionException
+        -->
+        <setting name="autoMappingUnknownColumnBehavior" value="NONE"/>
+
+        <!--配置默认的执行器，SIMPLE就是普通执行器
+            REUSE执行器会重用预处理语句（prepared statements)
+            BATCH执行器将重用语句并执行批量更新  默认SIMPLE
+        -->
+        <setting name="defaultExecutorType" value="SIMPLE"/>
+
+        <!--设置超时时间 任意正式 not set null-->
+        <!--<setting name="defaultStatementTimeout" value=""/>-->
+
+        <!--是否开启自动驼峰命名规则（camel case）映射，从经典A_COLUMN到经典Java属性名aColumn的类似映射-->
+        <setting name="mapUnderscoreToCamelCase" value="true"/>
+    </settings>
+
+
+    <!--default 默认环境-->
+    <environments default="development">
+        <!--多环境设置-->
+        <environment id="development">
+            <!--事务管理器-->
+            <transactionManager type="JDBC"/>
+            <!--数据池-->
+            <dataSource type="POOLED">
+                <!--驱动-->
+                <property name="driver" value="${db.driver}"/>
+                <!--数据库地址 jdbc:mysql://localhost:3306/t_wp_user -->
+                <property name="url" value="${db.url}"/>
+                <!--用户名-->
+                <property name="username" value="${db.username}"/>
+                <!--密码-->
+                <property name="password" value="${db.password}"/>
+            </dataSource>
+        </environment>
+    </environments>
+    <mappers>
+        <mapper class="org.apache.test.demo.mapper.ApplicationMapper"/>
+
+        <mapper resource="demo/mapper/aplication-mapper.xml"/>
+    </mappers>
+</configuration>
